@@ -1,7 +1,7 @@
 import okio.FileSystem
 import okio.Path.Companion.toPath
 
-var fullyContainedRanges = 0
+var overlappingRanges = 0
 
 fun main(args: Array<String>) {
     val path = args[0].toPath()
@@ -14,12 +14,9 @@ fun main(args: Array<String>) {
             val ranges = parseLine(line)
             val intersection = ranges.first.intersect(ranges.second)
 
-            if (intersection.isEmpty()) continue
-            if (intersection == ranges.first.toSet() || intersection == ranges.second.toSet()) {
-                ++fullyContainedRanges
-            }
+            if (intersection.isNotEmpty()) ++overlappingRanges
         }
-        println(fullyContainedRanges)
+        println(overlappingRanges)
     }
 }
 
